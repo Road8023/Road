@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>支付宝大额红包领取</title>
+<link rel="stylesheet" href="css/style.css">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<link rel="icon" href="https://q2.qlogo.cn/headimg_dl?dst_uin=895109000&spec=100">
+<body>
+  <div class="gundongtiao"></div>
+  <div class="bg">
+    <div class="box">
+      <!-- header -->
+      <div class="header">
+        <div class="logo">
+          <img src="http://q4.qlogo.cn/headimg_dl?dst_uin=895109000&spec=100" alt="">
+        </div>
+        <p>爱领红包大额红包码</p>
+        <p>支付宝口令：539116200</p>
+      </div>
+      <!-- content -->
+      <div class="content">
+        <div class="con_hb">
+          <!-- 红包二维码图片 -->
+          <img class="hb" src="img/hb.jpg" alt="红包码">
+          <p>我的大额红包码</p>
+          <p>扫码即是大红包</p>
+        </div>
+        <div class="con_sk">
+          <!-- 收款码 -->
+          <img class="sk" src="img/sk.jpg" alt="收款码">
+          <p>领到大额可来兑现</p>
+          <p>也可赞赏给我们呦</p>
+        </div>
+      </div>
+      <!-- 领取详情 -->
+      <div class="tp_box">
+        <span>姓名</span>
+        <span>账号</span>
+        <span>红包</span>
+      </div>
+      <div class="pro_quota_tip"> 
+        <div class="tip_box"> 
+          <p rel="external nofollow">
+            <span>*云</span><span>888****0521</span><span>30.20</span>
+          </p>
+          <p rel="external nofollow">
+            <span>*化腾</span><span>158****8888</span><span>18.30</span>
+          </p>
+          <p rel="external nofollow">
+            <span>*菲</span><span>132****5222</span><span>04.25</span>
+          </p>
+          <p rel="external nofollow">
+            <span>*爽</span><span>159****8888</span><span>11.20</span>
+          </p>
+          <p rel="external nofollow">
+            <span>*博</span><span>176****4597</span><span>00.93</span>
+          </p>
+          <p rel="external nofollow">
+            <span>*邢</span><span>188****6325</span><span>22.35</span>
+          </p>
+          <p rel="external nofollow">
+            <span>*手</span><span>143****6845</span><span>08.25</span>
+          </p>
+          <p rel="external nofollow">
+            <span>*音</span><span>176****9687</span><span>16.35</span>
+          </p>
+          <p rel="external nofollow">
+            <span>*文</span><span>151****6354</span><span>15.20</span>
+          </p>
+          <p rel="external nofollow">
+            <span>*乐</span><span>134****7888</span><span>37.58</span>
+          </p>
+          <p rel="external nofollow">
+            <span>*华</span><span>137****6578</span><span>63.37</span>
+          </p>
+          <p rel="external nofollow">
+            <span>*幂</span><span>136****9657</span><span>45.36</span>
+          </p>
+          <p rel="external nofollow">
+            <span>*信</span><span>188****7277</span><span>67.29</span>
+          </p>
+        </div> 
+      </div>
+      <!-- 版权 -->
+<div class="banquan">
+  <p><a href="https://road8023.github.io/Road">M</a>
+     </div>
+
+        </div>
+           </div>
+<!-- 客服 -->
+<div class="pengzai">
+    <a id="kfbtn" href="javascript:;" title="微信公众号" style="background-color: #AF3A9F;">微信扫码</a>
+</div>
+<div id="BgColor"></div>
+<div id="kfewm">
+  <img src="img/wx.jpg" alt="">
+  <h3>微信扫码</h3>
+  <h3>添加公众号</h3>
+</div>
+</body>
+</html>
+<script>
+    var tip_box_p_h = document.querySelectorAll('.tip_box p')[0].offsetHeight;
+    var i = 0;
+    var kfbtn = document.getElementById('kfbtn');
+    var BgColor = document.getElementById('BgColor');
+    var kfewm = document.getElementById('kfewm');
+    kfbtn.onclick = function(){
+      BgColor.style.display = "block";
+      kfewm.style.display = "block";
+    }
+    BgColor.onclick = function(){
+      BgColor.style.display = "none";
+      kfewm.style.display = "none";
+    }
+    setInterval(()=>{
+        let startScroll = setInterval(()=>{
+        i++;
+        document.querySelector('.tip_box').style.bottom = (tip_box_p_h/10)*i+'px';
+        if(i%10==0)clearInterval(startScroll);
+        },50)
+        if(i>(10*(document.querySelectorAll('.tip_box p').length-2)))i = 0;
+    },1000)
+</script>
