@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8" name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <link href="./static/css/tabler.min.css" rel="stylesheet">
+    <script src="./static/js/tabler.min.js"></script>
+    <script src="./static/js/sweetalert2.all.min.js"></script>
+    <link href="./static/css/sweetalert2.min.css" rel="stylesheet">
+    <script src="./static/js/clipboard.min.js"></script>
+    <link href="./static/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="favicon.ico">
+</head>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>苹果ID</title>
+</head>
+
+<body>
+
+    </br>
+    
+    <div class="container">
+        <h2>账号信息</h2>
+    </div>
+
+    
+
+    <script>
+        var clipboard = new ClipboardJS('.btn');
+
+        function alert_success() {
+            Swal.fire({
+                icon: 'success',
+                title: '警示',
+                text: '请合理使用账号',
+                showConfirmButton: true,
+                confirmButtonText: '点击确认，完成复制',
+                timerProgressBar: true,
+                allowOutsideClick: false
+            });
+        }
+    </script>
+
+    <div class="container">
+        <div class="row row-deck">
+            <div class="col-xs-4 col-md-4">
+                <div class="card shadow-lg" style="margin-top: 1rem;">
+                    <div class="card-status-start bg-green"></div>
+                    <div class="card-body">
+                        <h3 class="card-title">美区ID</h3>
+                        <h3 class="card-text">Road798@163.com</h3>
+                        <p class="card-subtitle mb-2 text-muted" style="line-height: 25px">备注：禁止在设置登，请在App Store登</p>
+                        <p class="card-subtitle mb-2 text-muted" style="line-height: 25px">上次检测时间：2024-05-02
+                        </p>
+                        <p class="card-subtitle mb-2 text-muted" style="line-height: 25px">状态：
+                            <span class="badge bg-green">正常</span>
+                        </p>
+                        <button id="username_2" class="btn btn-primary" data-clipboard-text="Road798@163.com"
+                            onclick="alert_success()">复制账号
+                        </button>
+                        <button id="password_2" class="btn btn-success" data-clipboard-text="First3017"
+                            onclick="alert_success()">复制密码
+                        </button>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4 col-md-4">
+                <div class="card shadow-lg" style="margin-top: 1rem;">
+                    <div class="card-status-start bg-green"></div>
+                    <div class="card-body">
+                        <h3 class="card-title">日区ID</h3>
+                        <h3 class="card-text">Road8023@163.com</h3>
+                        <p class="card-subtitle mb-2 text-muted" style="line-height: 25px">备注：禁止在设置登，请在App Store登</p>
+                        <p class="card-subtitle mb-2 text-muted" style="line-height: 25px">上次检测时间：2024-05-05
+                        </p>
+                        <p class="card-subtitle mb-2 text-muted" style="line-height: 25px">状态：
+                            <span class="badge bg-green">正常</span>
+                        </p>
+                        <button id="username_1" class="btn btn-primary" data-clipboard-text="Road8023@163.com"
+                            onclick="alert_success()">复制账号
+                        </button>
+                        <button id="password_1" class="btn btn-success" data-clipboard-text="First3017"
+                            onclick="alert_success()">复制密码
+                        </button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+    </div>
+    <style>
+        .footer {
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+    <div class="footer footer-transparent">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-6 text-md-right text-center">
+                <p class="copyright">Copyright &copy; 2019
+                    <a href="https://road8023.github.io/Road/First/appleid/" target="_blank" style="text-decoration: none;">M</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
