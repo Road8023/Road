@@ -1,22 +1,33 @@
-host-suffix, ai.com, Shawn
-host-suffix, auth0.com, Shawn
-host-suffix, challenges.cloudflare.com, Shawn
-host-suffix, chat.openai.com.cdn.cloudflare.net, Shawn
-host-suffix, client-api.arkoselabs.com, Shawn
-host-suffix, events.statsigapi.net, Shawn
-host-suffix, featuregates.org, Shawn
-host-suffix, googleapis.com, Shawn
-host-suffix, identrust.com, Shawn
-host-suffix, intercom.io, Shawn
-host-suffix, intercomcdn.com, Shawn
-host-suffix, launchdarkly.com, Shawn
-host-suffix, oaistatic.com, Shawn
-host-suffix, oaiusercontent.com, Shawn
-host-suffix, openai.com, Shawn
-host-suffix, openaiapi-site.azureedge.net, Shawn
-host-suffix, openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net, Shawn
-host-suffix, openaicom.imgix.net, Shawn
-host-suffix, openaicomproductionae4b.blob.core.windows.net, Shawn
-host-suffix, poe.com, Shawn
-host-suffix, segment.io, Shawn
-host-suffix, stripe.com, Shawn
+HOST,api.statsig.com,PROXY
+HOST,browser-intake-datadoghq.com,PROXY
+HOST,cdn.openai.com,PROXY
+HOST,chat.openai.com,PROXY
+HOST,chat.openai.com.cdn.cloudflare.net,PROXY
+HOST,ios.chat.openai.com,PROXY
+HOST,o33249.ingest.sentry.io,PROXY
+HOST,openai-api.arkoselabs.com,PROXY
+HOST,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net,PROXY
+HOST,openaicomproductionae4b.blob.core.windows.net,PROXY
+HOST,production-openaicom-storage.azureedge.net,PROXY
+HOST,static.cloudflareinsights.com,PROXY
+HOST-SUFFIX,algolia.net,PROXY
+HOST-SUFFIX,auth0.com,PROXY
+HOST-SUFFIX,chatgpt.com,PROXY
+HOST-SUFFIX,challenges.cloudflare.com,PROXY
+HOST-SUFFIX,client-api.arkoselabs.com,PROXY
+HOST-SUFFIX,events.statsigapi.net,PROXY
+HOST-SUFFIX,featuregates.org,PROXY
+HOST-SUFFIX,identrust.com,PROXY
+HOST-SUFFIX,intercom.io,PROXY
+HOST-SUFFIX,intercomcdn.com,PROXY
+HOST-SUFFIX,launchdarkly.com,PROXY
+HOST-SUFFIX,oaistatic.com,PROXY
+HOST-SUFFIX,oaiusercontent.com,PROXY
+HOST-SUFFIX,observeit.net,PROXY
+HOST-SUFFIX,openai.com,PROXY
+HOST-SUFFIX,openaiapi-site.azureedge.net,PROXY
+HOST-SUFFIX,openaicom.imgix.net,PROXY
+HOST-SUFFIX,segment.io,PROXY
+HOST-SUFFIX,sentry.io,PROXY
+HOST-SUFFIX,stripe.com,PROXY
+HOST-KEYWORD,openaicom-api,PROXY
