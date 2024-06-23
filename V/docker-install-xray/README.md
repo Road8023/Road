@@ -1,4 +1,4 @@
-## 一键安装步骤
+## 一键安装
 ```
 bash <(curl -sL https://raw.githubusercontent.com/Road8023/Road/OVO/V/docker-install-xray/install_xray_without_ssl.sh)
 ```
