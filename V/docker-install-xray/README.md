@@ -6,7 +6,6 @@ bash <(curl -sL https://raw.githubusercontent.com/Road8023/Road/OVO/V/docker-ins
 ```
 bash -c "$(curl -L https://raw.githubusercontent.com/Road8023/Road/refs/heads/OVO/V/docker-install-xray/shadowsocks-auto.sh))"
 ```
-```
 ## 卸载
 ```
 docker rm -f xray && rm -rf /etc/xray
