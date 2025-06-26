@@ -1,78 +1,51 @@
 #!/bin/bash
 
-red(){
+red() {
     echo -e "\033[31m\033[01m$1\033[0m"
 }
 
-green(){
+green() {
     echo -e "\033[32m\033[01m$1\033[0m"
 }
 
-yellow(){
+yellow() {
     echo -e "\033[33m\033[01m$1\033[0m"
 }
 
-REGEX=("debian" "ubuntu" "centos|red hat|kernel|oracle linux|alma|rocky" "'amazon linux'" "alpine")
-RELEASE=("Debian" "Ubuntu" "CentOS" "CentOS" "Alpine")
-PACKAGE_UPDATE=("apt -y update" "apt -y update" "yum -y update" "yum -y update" "apk update -f")
-PACKAGE_INSTALL=("apt -y install" "apt -y install" "yum -y install" "yum -y install" "apk add -f")
-CMD=("$(grep -i pretty_name /etc/os-release 2>/dev/null | cut -d \" -f2)" "$(hostnamectl 2>/dev/null | grep -i system | cut -d : -f2)" "$(lsb_release -sd 2>/dev/null)" "$(grep -i description /etc/lsb-release 2>/dev/null | cut -d \" -f2)" "$(grep . /etc/redhat-release 2>/dev/null)" "$(grep . /etc/issue 2>/dev/null | cut -d \\ -f1 | sed '/^[ ]*$/d')")
-
-for i in "${CMD[@]}"; do
-	SYS="$i" && [[ -n $SYS ]] && break
-done
-
-for ((int=0; int<${#REGEX[@]}; int++)); do
-	[[ $(echo "$SYS" | tr '[:upper:]' '[:lower:]') =~ ${REGEX[int]} ]] && SYSTEM="${RELEASE[int]}" && [[ -n $SYSTEM ]] && break
-done
-
-[[ -z $SYSTEM ]] && red "脚本暂时不支持VPS的当前系统，请使用主流操作系统" && exit 1
-[[ ! -f /etc/ssh/sshd_config ]] && sudo ${PACKAGE_UPDATE[int]} && sudo ${PACKAGE_INSTALL[int]} openssh-server
-[[ -z $(type -P curl) ]] && sudo ${PACKAGE_UPDATE[int]} && sudo ${PACKAGE_INSTALL[int]} curl
-
-WgcfIPv4Status=$(curl -s4m8 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2)
-WgcfIPv6Status=$(curl -s6m8 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2)
-if [[ $WgcfIPv4Status =~ "on"|"plus" ]] || [[ $WgcfIPv6Status =~ "on"|"plus" ]]; then
-    wg-quick down wgcf >/dev/null 2>&1
-    systemctl stop warp-go >/dev/null 2>&1
-    v6=$(curl -s6m8 api64.ipify.org -k)
-    v4=$(curl -s4m8 api64.ipify.org -k)
-    wg-quick up wgcf >/dev/null 2>&1
-    systemctl start warp-go >/dev/null 2>&1
-else
-    v6=$(curl -s6m8 api64.ipify.org -k)
-    v4=$(curl -s4m8 api64.ipify.org -k)
+# 检测是否为 root 用户
+if [ "$(id -u)" != "0" ]; then
+    red "错误：您必须以 root 用户执行此脚本！请执行 sudo -i 后再运行此脚本！"
+    exit 1
 fi
 
-sudo lsattr /etc/passwd /etc/shadow >/dev/null 2>&1
-sudo chattr -i /etc/passwd /etc/shadow >/dev/null 2>&1
-sudo chattr -a /etc/passwd /etc/shadow >/dev/null 2>&1
-sudo lsattr /etc/passwd /etc/shadow >/dev/null 2>&1
+hostnamectl set-hostname localhost
 
+# 读取用户输入的 SSH 端口，如果未输入则使用默认值 22
 read -p "输入设置的SSH端口（默认22）：" sshport
-[[ -z $sshport ]] && red "端口未设置，将使用默认22端口" && sshport=22
+sshport=${sshport:-22}
+
+# 读取用户输入的 root 密码
 read -p "输入设置的root密码：" password
-[[ -z $password ]] && red "密码未设置，将使用随机生成密码" && password=$(cat /proc/sys/kernel/random/uuid)
-echo root:$password | sudo chpasswd root
+while [[ -z $password ]]; do
+    red "密码未设置，请输入设置的root密码："
+    read -p "输入设置的root密码：" password
+done
 
-sudo sed -i "s/^#\?Port.*/Port $sshport/g" /etc/ssh/sshd_config;
-sudo sed -i "s/^#\?PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config;
-sudo sed -i "s/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g" /etc/ssh/sshd_config;
-sudo sed -i 's/^#\?KbdInteractiveAuthentication.*/KbdInteractiveAuthentication yes/g' /etc/ssh/sshd_config
+# 更新 root 密码
+echo root:$password | chpasswd
 
-sudo service ssh restart >/dev/null 2>&1 # 某些VPS系统的ssh服务名称为ssh，以防无法重启服务导致无法立刻使用密码登录
-sudo service sshd restart >/dev/null 2>&1
+# 更新 SSH 配置
+sed -i "s/^#\?Port .*/Port $sshport/" /etc/ssh/sshd_config
+sed -i "s/^#\?PermitRootLogin .*/PermitRootLogin yes/" /etc/ssh/sshd_config
+sed -i "s/^#\?PasswordAuthentication .*/PasswordAuthentication yes/" /etc/ssh/sshd_config
 
-yellow "VPS root登录信息设置完成！"
-if [[ -n $v4 && -z $v6 ]]; then
-    green "VPS登录IP地址及端口为：$v4:$sshport"
-fi
-if [[ -z $v4 && -n $v6 ]]; then
-    green "VPS登录IP地址及端口为：$v6:$sshport"
-fi
-if [[ -n $v4 && -n $v6 ]]; then
-    green "VPS登录IP地址及端口为：$v4:$sshport 或 $v6:$sshport"
-fi
+# 重启 SSH 服务
+service ssh restart 2>/dev/null
+service sshd restart 2>/dev/null
+
+# 显示结果
+yellow "SSH信息设置完成"
 green "用户名：root"
+green "端口：$sshport"
 green "密码：$password"
-yellow "请妥善保存好登录信息！然后重启VPS确保设置已保存！"
+yellow "请记录好新密码"
