@@ -2,6 +2,10 @@
 ```
 wget https://raw.githubusercontent.com/Road8023/Road/OVO/V/Port-forwarding/RealmOneKey.sh && chmod +x RealmOneKey.sh && ./RealmOneKey.sh
 ```
+## 端口转发管理工具 
+```
+bash <(curl -sL https://raw.githubusercontent.com/Road8023/Road/refs/heads/OVO/V/Port-forwarding/port_forward.sh)
+```
 ## 转发
 ```
 bash -c "$(curl -L https://raw.githubusercontent.com/Road8023/Road/refs/heads/OVO/V/Port-forwarding/Forward.sh)"
